@@ -3,17 +3,17 @@ const PORT = process.env.PORT || "3000";
 const mysql = require("mysql2");
 const bodyParser = require("body-parser");
 const cors = require("cors");
-
+require('dotenv').config(); 
 const app = express();
 app.use(cors());
 app.use(bodyParser.json());
 
 const db = mysql.createConnection({
-  host: "localhost",
-  port: 3309,
-  user: "root",
-  password: "123A",
-  database: "tracker_db",
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT || 3306,
+  user: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: process.env.DB_NAME,
 });
 
 app.get('/activity', (req, res) => {
